@@ -4,6 +4,11 @@ analyzer:
     lines_longer_than_80_chars: ignore
   exclude:
     - build/**
+    - .dart_tool/**
+    - node_modules/**      # Se estiver usando Flutter Web com pacotes JS
+    - ios/**
+    - android/**
+    - web/**
 linter:
   rules:
     file_names: false
