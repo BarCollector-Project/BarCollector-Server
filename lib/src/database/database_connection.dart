@@ -55,16 +55,22 @@ class DatabaseConnection {
   }
 
   /// Executa uma query e retorna os resultados
-  static Future<List<Map<String, dynamic>>> query(String sql, [List<dynamic>? params]) async {
+  static Future<List<Map<String, dynamic>>> query(String sql, [dynamic params]) async {
     final conn = await connection;
-    final result = await conn.execute(sql, parameters: params);
+    // Verifica se estamos usando parâmetros nomeados (Map) ou posicionais (List)
+    // e constrói o statement SQL da forma correta.
+    final sqlStatement = params is Map<String, dynamic> ? Sql.named(sql) : sql;
+    final result = await conn.execute(sqlStatement, parameters: params);
     return result.map((row) => row.toColumnMap()).toList();
   }
 
   /// Executa uma query que não retorna resultados (INSERT, UPDATE, DELETE)
-  static Future<int> execute(String sql, [List<dynamic>? params]) async {
+  static Future<int> execute(String sql, [dynamic params]) async {
     final conn = await connection;
-    final result = await conn.execute(sql, parameters: params);
+    // Verifica se estamos usando parâmetros nomeados (Map) ou posicionais (List)
+    // e constrói o statement SQL da forma correta.
+    final sqlStatement = params is Map<String, dynamic> ? Sql.named(sql) : sql;
+    final result = await conn.execute(sqlStatement, parameters: params);
     return result.affectedRows;
   }
 }

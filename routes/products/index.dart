@@ -5,7 +5,7 @@ import 'package:barcollector/src/data/product_repository.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final productRepository = context.read<ProductRepository>();
-  
+
   switch (context.request.method) {
     case HttpMethod.get:
       return _handleGet(productRepository);
@@ -21,28 +21,38 @@ Future<Response> _handleGet(ProductRepository repository) async {
   return Response.json(body: products.map((p) => p.toJson()).toList());
 }
 
+///
+/// Permite gravar produtos no banco de dados dia metodo POST
+/// o copor deve ser da seguinte forma:
+/// Um json contendo a variáveis "name", "barcode", "price".
+/// Por exemplo:
+/// {
+///   "name": "Produtu 1",
+///   "barcode": "78900000123",
+///   "price": "15.6",
+/// }
 Future<Response> _handlePost(RequestContext context, ProductRepository repository) async {
   try {
     final body = await context.request.body();
     final data = jsonDecode(body) as Map<String, dynamic>;
-    
+
     final name = data['name'] as String?;
     final barcode = data['barcode'] as String?;
     final price = (data['price'] as num?)?.toDouble();
-    
+
     if (name == null || barcode == null || price == null) {
       return Response(
         statusCode: HttpStatus.badRequest,
         body: 'Campos obrigatórios: name, barcode, price',
       );
     }
-    
+
     final product = await repository.createProduct(
       name: name,
       barcode: barcode,
       price: price,
     );
-    
+
     return Response.json(
       statusCode: HttpStatus.created,
       body: product.toJson(),

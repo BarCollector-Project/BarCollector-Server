@@ -51,10 +51,10 @@ class ProductRepository {
 
   /// Busca um produto pelo ID
   Future<Product?> getProductById(String id) async {
-    const sql = '''
+    const sql = r'''
       SELECT id, name, barcode, price 
       FROM products 
-      WHERE id = \$1
+      WHERE id = $1
     ''';
 
     final results = await DatabaseConnection.query(sql, [id]);

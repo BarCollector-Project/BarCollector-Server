@@ -156,3 +156,78 @@
 2025-07-11 09:50:16.397 -04 [11928] LOG:  checkpoint starting: shutdown immediate
 2025-07-11 09:50:16.409 -04 [11928] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.015 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/1EC08F0, redo lsn=0/1EC08F0
 2025-07-11 09:50:16.424 -04 [17252] LOG:  sistema de banco de dados está desligado
+2025-07-22 11:19:59.512 -04 [4924] LOG:  iniciando PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit
+2025-07-22 11:19:59.516 -04 [4924] LOG:  escutando no endereço IPv6 "::1", porta 5432
+2025-07-22 11:19:59.517 -04 [4924] LOG:  escutando no endereço IPv4 "127.0.0.1", porta 5432
+2025-07-22 11:19:59.646 -04 [7112] LOG:  sistema de banco de dados foi desligado em 2025-07-11 09:50:16 -04
+2025-07-22 11:19:59.679 -04 [4924] LOG:  sistema de banco de dados está pronto para aceitar conexões
+2025-07-22 11:20:24.843 -04 [3620] ERRO:  duplicar valor da chave viola a restriÃ§Ã£o de unicidade "products_barcode_key"
+2025-07-22 11:20:24.843 -04 [3620] DETALHE:  Chave (barcode)=(7890000000000) jÃ¡ existe.
+2025-07-22 11:20:24.843 -04 [3620] COMANDO:        INSERT INTO products (id, name, barcode, price) 
+	      VALUES ($1, $2, $3, $4)
+	    
+2025-07-22 11:24:59.655 -04 [13292] LOG:  checkpoint starting: time
+2025-07-22 11:25:00.243 -04 [13292] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.562 s, sync=0.012 s, total=0.593 s; sync files=7, longest=0.003 s, average=0.002 s; distance=2 kB, estimate=2 kB; lsn=0/1EC13A0, redo lsn=0/1EC1348
+2025-07-22 16:18:19.196 -04 [11292] LOG:  iniciando PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit
+2025-07-22 16:18:19.201 -04 [11292] LOG:  escutando no endereço IPv6 "::1", porta 5432
+2025-07-22 16:18:19.201 -04 [11292] LOG:  escutando no endereço IPv4 "127.0.0.1", porta 5432
+2025-07-22 16:18:19.331 -04 [12164] LOG:  sistema de banco de dados foi interrompido; última execução em 2025-07-22 11:25:00 -04
+2025-07-22 16:18:19.845 -04 [12164] LOG:  sistema de banco de dados não foi desligado corretamente; recuperação automática está em andamento
+2025-07-22 16:18:19.853 -04 [12164] LOG:  redo inicia em 0/1EC1348
+2025-07-22 16:18:19.853 -04 [12164] LOG:  comprimento de registro inválido em 0/1EC1450: esperado pelo menos 24, obtido 0
+2025-07-22 16:18:19.854 -04 [12164] LOG:  refazer feito em 0/1EC1418 uso do sistema: CPU: usuário: 0.00 s, sistema: 0.00 s, decorrido: 0.00 s
+2025-07-22 16:18:19.861 -04 [2164] LOG:  checkpoint starting: end-of-recovery immediate wait
+2025-07-22 16:18:19.892 -04 [2164] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.034 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1EC1450, redo lsn=0/1EC1450
+2025-07-22 16:18:19.915 -04 [11292] LOG:  sistema de banco de dados está pronto para aceitar conexões
+2025-07-22 23:08:53.949 -04 [11292] LOG:  processo trabalhador em segundo plano "logical replication launcher" (PID 8996) foi terminado pela exceção 0xC000013A
+2025-07-22 23:08:53.949 -04 [11292] DICA:  Veja o arquivo de cabeçalho C "ntstatus.h" para obter uma descrição do valor hexadecimal.
+2025-07-22 23:08:53.950 -04 [11292] LOG:  terminando quaisquer outros processos servidor ativos
+2025-07-22 23:08:54.041 -04 [11292] LOG:  todos os processos servidor foram terminados; reinicializando
+2025-07-22 23:08:54.586 -04 [11292] LOG:  processo de ativação (PID 14096) foi terminado pela exceção 0xC0000142
+2025-07-22 23:08:54.586 -04 [11292] DICA:  Veja o arquivo de cabeçalho C "ntstatus.h" para obter uma descrição do valor hexadecimal.
+2025-07-22 23:08:54.586 -04 [11292] LOG:  interrompendo a ativação devido a falha no processo de ativação
+2025-07-22 23:08:54.590 -04 [11292] LOG:  sistema de banco de dados está desligado
+2025-07-23 08:13:28.043 -04 [11000] LOG:  iniciando PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit
+2025-07-23 08:13:28.049 -04 [11000] LOG:  escutando no endereço IPv6 "::1", porta 5432
+2025-07-23 08:13:28.049 -04 [11000] LOG:  escutando no endereço IPv4 "127.0.0.1", porta 5432
+2025-07-23 08:13:28.184 -04 [11308] LOG:  sistema de banco de dados foi interrompido; última execução em 2025-07-22 16:18:19 -04
+2025-07-23 08:13:28.744 -04 [11308] LOG:  sistema de banco de dados não foi desligado corretamente; recuperação automática está em andamento
+2025-07-23 08:13:28.753 -04 [11308] LOG:  redo inicia em 0/1EC14C8
+2025-07-23 08:13:28.754 -04 [11308] LOG:  comprimento de registro inválido em 0/1EC1500: esperado pelo menos 24, obtido 0
+2025-07-23 08:13:28.754 -04 [11308] LOG:  refazer feito em 0/1EC14C8 uso do sistema: CPU: usuário: 0.00 s, sistema: 0.00 s, decorrido: 0.00 s
+2025-07-23 08:13:28.762 -04 [21428] LOG:  checkpoint starting: end-of-recovery immediate wait
+2025-07-23 08:13:28.782 -04 [21428] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.024 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1EC1500, redo lsn=0/1EC1500
+2025-07-23 08:13:28.802 -04 [11000] LOG:  sistema de banco de dados está pronto para aceitar conexões
+2025-07-23 12:33:29.223 -04 [21428] LOG:  checkpoint starting: time
+2025-07-23 12:33:31.415 -04 [21428] LOG:  checkpoint complete: wrote 20 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.170 s, sync=0.004 s, total=2.201 s; sync files=6, longest=0.002 s, average=0.001 s; distance=38 kB, estimate=38 kB; lsn=0/1ECB0B8, redo lsn=0/1ECB060
+2025-07-23 12:36:12.564 -04 [15640] LOG:  nÃ£o foi possÃ­vel receber dados do cliente: unrecognized winsock error 10054
+2025-07-23 12:37:23.113 -04 [14024] ERRO:  caractere com sequÃªncia de bytes 0x8d na codificaÃ§Ã£o "WIN1252" nÃ£o tem equivalente na codificaÃ§Ã£o "UTF8"
+2025-07-23 12:37:23.156 -04 [14024] ERRO:  gatilho "update_products_updated_at" para relaÃ§Ã£o "products" jÃ¡ existe
+2025-07-23 12:37:23.156 -04 [14024] COMANDO:  CREATE TRIGGER update_products_updated_at 
+	    BEFORE UPDATE ON products 
+	    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+2025-07-23 12:38:29.416 -04 [21428] LOG:  checkpoint starting: time
+2025-07-23 12:38:29.974 -04 [21428] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.544 s, sync=0.004 s, total=0.559 s; sync files=6, longest=0.001 s, average=0.001 s; distance=29 kB, estimate=37 kB; lsn=0/1ED24E0, redo lsn=0/1ED2488
+2025-07-23 12:41:23.704 -04 [5552] ERRO:  gatilho "update_products_updated_at" para relaÃ§Ã£o "products" jÃ¡ existe
+2025-07-23 12:41:23.704 -04 [5552] COMANDO:  CREATE TRIGGER update_products_updated_at 
+	    BEFORE UPDATE ON products 
+	    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+2025-07-23 12:43:22.243 -04 [17968] ERRO:  valor de entrada Ã© invÃ¡lido para enum user_role: "'admin'" no caractere 81
+2025-07-23 12:43:22.243 -04 [17968] COMANDO:  INSERT INTO "users"("name","password","role") VALUES('LUCAS JUNIOR','ljr112003','''admin''');
+2025-07-23 12:43:29.986 -04 [21428] LOG:  checkpoint starting: time
+2025-07-23 12:43:35.959 -04 [21428] LOG:  checkpoint complete: wrote 53 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.879 s, sync=0.073 s, total=5.973 s; sync files=45, longest=0.023 s, average=0.002 s; distance=173 kB, estimate=173 kB; lsn=0/1EFDB68, redo lsn=0/1EFDB10
+2025-07-23 12:48:29.975 -04 [21428] LOG:  checkpoint starting: time
+2025-07-23 12:48:30.741 -04 [21428] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.739 s, sync=0.004 s, total=0.767 s; sync files=5, longest=0.002 s, average=0.001 s; distance=0 kB, estimate=156 kB; lsn=0/1EFDEC0, redo lsn=0/1EFDE68
+2025-07-23 14:10:03.322 -04 [11000] LOG:  could not reserve shared memory region (addr=0000019DE8250000) for child 0000000000001360: error code 487
+2025-07-23 18:48:19.225 -04 [11000] LOG:  processo servidor (PID 20236) foi terminado pela exceção 0xC000013A
+2025-07-23 18:48:19.225 -04 [11000] DETALHE:  Processo que falhou estava executando:       SELECT id, name, password, role::text 
+	      FROM users 
+	      WHERE name = $1
+	    
+2025-07-23 18:48:19.225 -04 [11000] DICA:  Veja o arquivo de cabeçalho C "ntstatus.h" para obter uma descrição do valor hexadecimal.
+2025-07-23 18:48:19.228 -04 [11000] LOG:  terminando quaisquer outros processos servidor ativos
+2025-07-23 18:48:19.323 -04 [11000] LOG:  todos os processos servidor foram terminados; reinicializando
+2025-07-23 18:48:19.412 -04 [11000] LOG:  processo de ativação (PID 17936) foi terminado pela exceção 0xC0000142
+2025-07-23 18:48:19.412 -04 [11000] DICA:  Veja o arquivo de cabeçalho C "ntstatus.h" para obter uma descrição do valor hexadecimal.
+2025-07-23 18:48:19.412 -04 [11000] LOG:  interrompendo a ativação devido a falha no processo de ativação
+2025-07-23 18:48:19.416 -04 [11000] LOG:  sistema de banco de dados está desligado
