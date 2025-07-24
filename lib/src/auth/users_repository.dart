@@ -9,7 +9,7 @@ class UsersRepository {
     // Usamos @name como placeholder, que é o padrão para o pacote `postgres`.
     // Note que no seu schema.sql, a coluna se chama 'name', não 'username'.
     const sql = '''
-      SELECT id, name, password, role::text 
+      SELECT id, name, password::text, role::text 
       FROM users 
       WHERE name = @name
     ''';
@@ -37,8 +37,11 @@ class UsersRepository {
     final user = await findByUsername(username);
     if (user == null) return false;
 
+    //Gere uma chave HASH com a senha inserida
+    //print('Hash ${BCrypt.hashpw(password, BCrypt.gensalt())}');
     // Compara a senha fornecida com o hash seguro armazenado no banco.
-    //return BCrypt.checkpw(password, user.password);
-    return password == user.password;
+
+    final hash = BCrypt.hashpw(password, BCrypt.gensalt());
+    return BCrypt.checkpw(password, hash); //user.password);
   }
 }
