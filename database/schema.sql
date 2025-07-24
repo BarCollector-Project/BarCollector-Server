@@ -55,3 +55,7 @@ INSERT INTO products (name, barcode, price) VALUES
     ('Feijão Preto 1kg', '7891000000002', 8.75),
     ('Açúcar Cristal 1kg', '7891000000003', 4.20)
 ON CONFLICT (barcode) DO NOTHING;
+
+INSERT INTO users (name, password, role) VALUES
+    ('admin', '$2a$12$lOD1dCYaNxbq8NQHr/eISOnYvd2MfFvIQ3VikMaAJz6vA6CWhTlRK', 'admin')
+ON CONFLICT DO NOTHING;
