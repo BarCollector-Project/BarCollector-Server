@@ -1,5 +1,9 @@
 -- Schema para o banco de dados BarCollector
 
+-- Garante que o cliente (psql) está comunicando com o servidor em UTF-8.
+-- Isso previne problemas de codificação com caracteres especiais no script.
+SET client_encoding = 'UTF8';
+
 -- Extensão para UUIDs
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
