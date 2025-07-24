@@ -40,8 +40,6 @@ class UsersRepository {
     //Gere uma chave HASH com a senha inserida
     //print('Hash ${BCrypt.hashpw(password, BCrypt.gensalt())}');
     // Compara a senha fornecida com o hash seguro armazenado no banco.
-
-    final hash = BCrypt.hashpw(password, BCrypt.gensalt());
-    return BCrypt.checkpw(password, hash); //user.password);
+    return BCrypt.checkpw(password, user.password);
   }
 }
