@@ -23,8 +23,8 @@ CREATE TYPE user_role AS ENUM ('admin', 'common');
 -- Tabela de usuário
 CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4()::text,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    password TEXT NOT NULL,
     role user_role NOT NULL DEFAULT 'common',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_products_barcode ON products(barcode);
-CREATE INDEX IF NOT EXISTS idx_users_name ON users(name);
 
 -- Trigger para atualizar updated_at automaticamente
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -62,5 +61,5 @@ ON CONFLICT (barcode) DO NOTHING;
 
 -- Deve ser alterado posteriormente
 INSERT INTO users (name, password, role) VALUES
-    ('admin', '$2a$10$TseQRKfCVhZfkJTpJUgEGOfA3UHe7HtTAAh.SrIZ8fB29i/vnnuFq', 'admin')
-ON CONFLICT DO NOTHING;
+    ('admin', '$2a$10$dJrccUgKLeBltNc5CdUsneoTaj1jEwPnAYlxIcN8w0euMWQ0tQ.ru', 'admin')
+ON CONFLICT (name) DO NOTHING;

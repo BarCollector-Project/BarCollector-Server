@@ -9,9 +9,10 @@ class UsersRepository {
     // Usamos @name como placeholder, que é o padrão para o pacote `postgres`.
     // Note que no seu schema.sql, a coluna se chama 'name', não 'username'.
     const sql = '''
-      SELECT id, name, password::text, role::text 
+      SELECT id, name AS username, password, role::text 
       FROM users 
       WHERE name = @name
+      LIMIT 1
     ''';
 
     final results = await DatabaseConnection.query(sql, {'name': username});
@@ -20,16 +21,13 @@ class UsersRepository {
       return null;
     }
 
-    //Obtém o resultado na consulta e converte os nomes pelos compatível no cliente (Em especíco o "name" para "username")
-    final userMap = results.first;
-    final adjustedMap = {
-      'id': userMap['id'],
-      'username': userMap['name'],
-      'password': userMap['password'],
-      'role': userMap['role'],
-    };
+    return User.fromMap(results.first);
+  }
 
-    return User.fromMap(adjustedMap);
+  /// Gera um hash bcrypt para uma senha, pronto para ser armazenado no banco.
+  /// O salt é gerado e incluído no próprio hash.
+  String hashPassword(String password) {
+    return BCrypt.hashpw(password, BCrypt.gensalt());
   }
 
   /// Valida se as credenciais do usuário são corretas usando bcrypt.
@@ -37,9 +35,11 @@ class UsersRepository {
     final user = await findByUsername(username);
     if (user == null) return false;
 
-    //Gere uma chave HASH com a senha inserida
-    //print('Hash ${BCrypt.hashpw(password, BCrypt.gensalt())}');
-    // Compara a senha fornecida com o hash seguro armazenado no banco.
+    // A função `checkpw` compara a senha em texto plano com o hash do banco.
+    // Ela extrai o salt do hash armazenado e faz a comparação de forma segura.
+    // O hash vindo do banco (user.password) deve ser uma string limpa.
+    // Se você encontrar problemas como espaços ou caracteres nulos,
+    // a causa provável está na inserção ou recuperação dos dados, não aqui.
     return BCrypt.checkpw(password, user.password);
   }
 }

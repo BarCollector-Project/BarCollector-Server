@@ -23,6 +23,7 @@ DB_PORT=5432
 DB_NAME=barcollector
 DB_USER=postgres
 DB_PASSWORD=sua_senha
+JWT_SECRET=chave_secreta
 ```
 
 ### 2. Criar o Banco de Dados
