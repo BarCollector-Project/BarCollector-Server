@@ -61,18 +61,29 @@ Ou pelo cliente PostgreSQL:
 | created_at | TIMESTAMP | Data de criação |
 | updated_at | TIMESTAMP | Data da última atualização |
 
+### Tabela `users`
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id | VARCHAR(36) | ID único do produto (UUID) |
+| name | VARCHAR(255) | Nome do produto |
+| password | TEXT | Senha hash do usuário |
+| role | user_role | Regra 'admin' ou 'user' |
+| created_at | TIMESTAMP | Data de criação |
+| updated_at | TIMESTAMP | Data da última atualização |
+
 ## Endpoints da API
 
-### GET `/products`
-Retorna todos os produtos
+Abaixo estão os endpoint para comunicação com o banco de dados através do servidor.
 
-### GET `/products/{id}`
-Retorna um produto específico pelo ID
+## Endpoint `products`
 
 ### POST `/products`
+
 Cria um novo produto
 
-Body:
+Body para envio:
+
 ```json
 {
   "name": "Nome do Produto",
@@ -81,10 +92,83 @@ Body:
 }
 ```
 
+### GET `/products`
+
+Retorna todos os produtos como uma lista de objetos JSON
+
+Respota do servidor:
+
+```json
+[
+    {
+        "id": "4654d216-e452-464c-a0b6-56c475bb4697",
+        "name": "Açúcar Cristal 1kg",
+        "barcode": "7891000000003",
+        "price": 4.2
+    },
+    {
+        "id": "a3b8972f-954b-43df-b251-ef5790350bd3",
+        "name": "Arroz Branco 5kg",
+        "barcode": "7891000000001",
+        "price": 25.0
+    },
+    {
+        "id": "94973fe0-fa85-4d54-9a28-55fb894eedb0",
+        "name": "Café em Pó 500g",
+        "barcode": "7891000052402",
+        "price": 18.5
+    },
+    {
+        "id": "2f286a47-30b6-4d13-8d8c-5e015fbc8df1",
+        "name": "Feijão Preto 1kg",
+        "barcode": "7891000000002",
+        "price": 8.75
+    },
+    {
+        "id": "726a0067-dd5c-4e9a-8d08-e2e3a505e390",
+        "name": "Leite Integral 1L",
+        "barcode": "7891000315101",
+        "price": 5.99
+    }
+]
+```
+
+### GET `/products/{id}`
+
+Retorna um produto específico pelo ID.
+
+Resposta do servidor:
+
+```json
+{
+    "id": "4654d216-e452-464c-a0b6-56c475bb4697",
+    "name": "Açúcar Cristal 1kg",
+    "barcode": "7891000000003",
+    "price": 4.2
+}
+```
+
+### GET `/products/barcode/{barcode}`
+
+Retorna um produto específico pelo código de barras
+
+Resposta do servidor:
+
+```json
+{
+    "id": "4654d216-e452-464c-a0b6-56c475bb4697",
+    "name": "Açúcar Cristal 1kg",
+    "barcode": "7891000000003",
+    "price": 4.2
+}
+```
+
 ### PUT `/products/{id}`
+
 Atualiza um produto existente
 
 ### DELETE `/products/{id}`
+
 Remove um produto
 
 ## Executar a API

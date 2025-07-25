@@ -5,7 +5,7 @@ Middleware corsMiddleware() {
     return (context) async {
       // Permite requisições CORS (pré-vôo OPTIONS)
       if (context.request.method == HttpMethod.options) {
-        return Response(statusCode: 204, headers: _corsHeaders);
+        return Response(headers: _corsHeaders);
       }
 
       // Processa normalmente e adiciona os headers de CORS

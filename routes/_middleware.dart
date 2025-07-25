@@ -4,16 +4,12 @@ import 'package:dart_frog/dart_frog.dart';
 import '../middleware/_auth.dart';
 import '../middleware/_cors.dart';
 
-ProductRepository productRepository = ProductRepository();
-
 Handler middleware(Handler handler) {
   return handler
       .use(corsMiddleware())
       .use(authMiddleware())
-      .use(
-        provider<ProductRepository>(
-          (_) => productRepository,
-        ),
-      )
+      // É uma boa prática instanciar os repositórios dentro do provider
+      // para gerenciar melhor o ciclo de vida, em vez de usar um singleton global.
+      .use(provider<ProductRepository>((_) => ProductRepository()))
       .use(provider<UsersRepository>((_) => UsersRepository()));
 }
