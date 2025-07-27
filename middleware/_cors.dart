@@ -22,7 +22,11 @@ Middleware corsMiddleware() {
       final response = await handler(context);
 
       // ...e então adiciona os cabeçalhos CORS à resposta antes de enviá-la.
-      return response.copyWith(headers: {...response.headers, ..._corsHeaders});
+      return Response(
+        statusCode: response.statusCode,
+        body: await response.body(),
+        headers: {...response.headers, ..._corsHeaders},
+      );
     };
   };
 }

@@ -19,6 +19,9 @@ build/
 
 # Test related files
 coverage/
+cert/
+Caddyfile
+./logfile
 
 # Environment variables - Do not commit secrets!
 .env
