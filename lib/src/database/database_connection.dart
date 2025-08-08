@@ -64,6 +64,11 @@ class DatabaseConnection {
     return result.map((row) => row.toColumnMap()).toList();
   }
 
+  static Future<void> transaction(Future<void> Function(TxSession) callback) async {
+    final conn = await connection;
+    return conn.runTx(callback);
+  }
+
   /// Executa uma query que não retorna resultados (INSERT, UPDATE, DELETE)
   static Future<int> execute(String sql, [dynamic params]) async {
     final conn = await connection;

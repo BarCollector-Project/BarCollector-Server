@@ -124,6 +124,11 @@ class ProductRepository {
     );
   }
 
+  Future<bool> bulkInsertProductsFromMap(List<Product> productsData) async {
+    if (productsData.isEmpty) return false;
+    final connection = await DatabaseConnection.connection;
+  }
+
   /// Remove um produto
   Future<bool> deleteProduct(String id) async {
     const sql = 'DELETE FROM products WHERE id = \$1';

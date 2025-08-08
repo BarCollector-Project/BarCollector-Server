@@ -18,12 +18,19 @@ cp .env.example .env
 Edite o arquivo `.env` com suas configurações:
 
 ```env
+# Configurações do banco de dados
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=barcollector
 DB_USER=postgres
 DB_PASSWORD=sua_senha
+
+# Configurações de segurança
 JWT_SECRET=chave_secreta
+
+# Configurações de certificado
+CERT=diretorio_certificado
+CERT_KEY=diretorio_chave_certificado
 ```
 
 ### 2. Criar o Banco de Dados
