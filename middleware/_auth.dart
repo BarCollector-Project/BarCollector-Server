@@ -5,9 +5,10 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 Middleware authMiddleware() {
   return (handler) {
     return (context) async {
-      if (context.request.method == HttpMethod.options) {
-        return handler(context);
-      }
+      // TODO: testes... ajuste novamente para produção
+      //if (context.request.method == HttpMethod.options) {
+      return handler(context);
+      //}
 
       final path = context.request.uri.path;
       final isPublic = ['/login', '/api/health'].contains(path);

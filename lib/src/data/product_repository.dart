@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:barcollector/src/database/database_connection.dart';
+import 'package:postgres/postgres.dart';
 import 'package:uuid/uuid.dart';
 
 /// Representa um produto no sistema.
@@ -124,14 +123,55 @@ class ProductRepository {
     );
   }
 
-  Future<bool> bulkInsertProductsFromMap(List<Product> productsData) async {
-    if (productsData.isEmpty) return false;
-    final connection = await DatabaseConnection.connection;
+  /// Insere ou atualiza uma lista de produtos no banco de dados.
+  ///
+  /// Esta operação é conhecida como "upsert".
+  /// - Se um produto com o mesmo `barcode` não existir, ele será inserido.
+  /// - Se um produto com o mesmo `barcode` já existir, ele será atualizado
+  ///   APENAS se o `name` ou `price` forem diferentes.
+  ///
+  /// A operação é atômica (realizada em uma transação).
+  /// Retorna `true` se a operação for bem-sucedida, `false` caso contrário.
+  Future<bool> bulkInsertProducts(List<Product> productsData) async {
+    if (productsData.isEmpty) return true;
+
+    try {
+      await DatabaseConnection.transaction((session) async {
+        const sql = '''
+          INSERT INTO products (name, barcode, price)
+          VALUES (@name, @barcode, @price)
+          ON CONFLICT (barcode) DO UPDATE SET
+            name = EXCLUDED.name,
+            price = EXCLUDED.price
+          WHERE
+            products.name IS DISTINCT FROM EXCLUDED.name OR
+            products.price IS DISTINCT FROM EXCLUDED.price;
+        ''';
+
+        // Usando Sql.named para alinhar com a documentação e simplificar o código.
+        // O driver do banco de dados lida com a execução segura da query para cada item.
+        for (final product in productsData) {
+          await session.execute(
+            Sql.named(sql),
+            parameters: {
+              'name': product.name,
+              'barcode': product.barcode,
+              'price': product.price,
+            },
+          );
+        }
+      });
+      return true;
+    } catch (e) {
+      // Em uma aplicação real, use um logger mais robusto.
+      print('Erro durante a inserção/atualização em massa de produtos: $e');
+      return false;
+    }
   }
 
   /// Remove um produto
   Future<bool> deleteProduct(String id) async {
-    const sql = 'DELETE FROM products WHERE id = \$1';
+    const sql = r'DELETE FROM products WHERE id = $1';
     final affectedRows = await DatabaseConnection.execute(sql, [id]);
     return affectedRows > 0;
   }

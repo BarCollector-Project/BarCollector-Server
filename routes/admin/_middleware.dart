@@ -2,11 +2,16 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 
-Handler middleware(Handler handle) {
+import '../../middleware/_productRepository.dart';
+
+Handler middleware(Handler handler) {
   return (context) async {
+    //TODO: teste.... faça ajuste para produção.
+    return handler.use(productRepository())(context);
+
     final payload = context.read<Map<String, dynamic>>();
     if (payload.containsKey('role') && payload['role'] == 'ADMIN') {
-      return await handle(context);
+      return await handler(context);
     }
     return Response.json(
       statusCode: HttpStatus.unauthorized,

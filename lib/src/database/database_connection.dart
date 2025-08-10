@@ -64,7 +64,7 @@ class DatabaseConnection {
     return result.map((row) => row.toColumnMap()).toList();
   }
 
-  static Future<void> transaction(Future<void> Function(TxSession) callback) async {
+  static Future<R> transaction<R>(Future<R> Function(TxSession) callback) async {
     final conn = await connection;
     return conn.runTx(callback);
   }
