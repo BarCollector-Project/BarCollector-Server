@@ -25,6 +25,8 @@ Future<Response> onRequest(RequestContext context) async {
       body: {'error': 'Nenhum arquivo enviado. O arquivo deve estar no campo "file".'},
     );
   }
+
+  //TODO: Trocar CSV para XML para melhor compatibilidade futuramente
   if (file.contentType.mimeType != 'text/csv') {
     return Response.json(
       statusCode: HttpStatus.unsupportedMediaType,
