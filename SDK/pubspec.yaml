@@ -1,0 +1,10 @@
+name: barcollector_sdk
+description: Um SDK para o frontend do projeto BarCollector.
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
