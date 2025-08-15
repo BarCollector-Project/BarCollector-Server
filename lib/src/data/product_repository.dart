@@ -45,7 +45,7 @@ class ProductRepository {
     ''';
 
     final results = await DatabaseConnection.query(sql);
-    return results.map((row) => Product.fromMap(row)).toList();
+    return results.map(Product.fromMap).toList();
   }
 
   /// Busca um produto pelo ID
@@ -64,10 +64,10 @@ class ProductRepository {
 
   /// Busca produtos pelo código de barras
   Future<Product?> getProductByBarcode(String barcode) async {
-    const sql = '''
+    const sql = r'''
       SELECT id, name, barcode, price 
       FROM products 
-      WHERE barcode = \$1
+      WHERE barcode = $1
     ''';
 
     final results = await DatabaseConnection.query(sql, [barcode]);
@@ -84,9 +84,9 @@ class ProductRepository {
   }) async {
     final id = const Uuid().v4();
 
-    const sql = '''
+    const sql = r'''
       INSERT INTO products (id, name, barcode, price) 
-      VALUES (\$1, \$2, \$3, \$4)
+      VALUES ($1, $2, $3, $4)
     ''';
 
     await DatabaseConnection.execute(sql, [id, name, barcode, price]);
@@ -106,10 +106,10 @@ class ProductRepository {
     required String barcode,
     required double price,
   }) async {
-    const sql = '''
+    const sql = r'''
       UPDATE products 
-      SET name = \$2, barcode = \$3, price = \$4 
-      WHERE id = \$1
+      SET name = $2, barcode = $3, price = $4 
+      WHERE id = $1
     ''';
 
     final affectedRows = await DatabaseConnection.execute(sql, [id, name, barcode, price]);

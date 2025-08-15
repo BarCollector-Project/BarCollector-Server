@@ -33,6 +33,44 @@ CREATE TABLE IF NOT EXISTS users (
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_products_barcode ON products(barcode);
 
+-- Tipos para a tabela de coleta
+CREATE TYPE collect_reason AS ENUM (
+    'inventory', -- Contagem de inventário
+    'breakage',  -- Produto quebrado/danificado
+    'expiration',-- Produto vencido
+    'transfer',  -- Transferência entre locais
+    'entry'      -- Entrada de novo estoque
+);
+
+CREATE TYPE collect_origin AS ENUM (
+    'stock',     -- Estoque principal
+    'shelf',     -- Prateleira/Gôndola
+    'warehouse'  -- Armazém/Depósito
+);
+
+-- Tabela de registros de coleta (cabeçalho da coleta)
+-- Cada registro representa uma "sessão" de coleta.
+CREATE TABLE IF NOT EXISTS collect_registers (
+    id VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4()::text,
+    user_id VARCHAR(36) NOT NULL REFERENCES users(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela com os produtos de uma coleta
+-- Cada linha é um produto dentro de uma sessão de coleta.
+CREATE TABLE IF NOT EXISTS collect_register_items (
+    id VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4()::text,
+    collect_register_id VARCHAR(36) NOT NULL REFERENCES collect_registers(id) ON DELETE CASCADE,
+    product_id VARCHAR(36) NOT NULL REFERENCES products(id),
+    quantity INTEGER NOT NULL CHECK (quantity > 0),
+    reason collect_reason NOT NULL,
+    origin collect_origin NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_collect_registers_user_id ON collect_registers(user_id);
+CREATE INDEX IF NOT EXISTS idx_collect_register_items_register_id ON collect_register_items(collect_register_id);
+
 -- Trigger para atualizar updated_at automaticamente
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -48,6 +86,10 @@ CREATE TRIGGER update_products_updated_at
 
 CREATE TRIGGER update_users_updated_at
     BEFORE UPDATE ON users
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_collect_registers_updated_at
+    BEFORE UPDATE ON collect_registers
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Dados de exemplo
