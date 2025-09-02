@@ -1,6 +1,6 @@
 name: barcollector_sdk
 description: Um SDK para o frontend do projeto BarCollector.
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
