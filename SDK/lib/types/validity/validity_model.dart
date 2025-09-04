@@ -66,7 +66,7 @@ class ValidityModel {
     this.id,
   });
 
-  factory ValidityModel.fromJson(Map<String, dynamic> json) {
+  factory ValidityModel.fromMap(Map<String, dynamic> json) {
     final json_dtValidade = json[ValidityColumnsNames.dtValidade.columnName];
     final json_dtFabricacao = json[ValidityColumnsNames.dtFabricacao.columnName];
     final json_dtCriacao = json[ValidityColumnsNames.dtCriacao.columnName];
