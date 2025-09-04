@@ -1,14 +1,27 @@
 enum ValidityColumnsNames {
   /// PRIMARY
+  /// ID do registro
   id('es1v_id'),
+
+  /// ID do produto
   pId('es1_cod'),
   empresa('es1_empresa'),
   codigo('es1_codigo'),
-  //O número do recebimento do produto
-  // (Quando é lançado a nota de terceiro marcando para recebimento no coletor).
+
+  /// Descrição do produto
+  /// Este é o nome da columna na tabela es1, então só será útil
+  /// se for obtido esta coluna (es1.es1_descembalagem)
+  name('es1_descembalagem'),
+
+  /// O número do recebimento do produto
+  /// (Quando é lançado a nota de terceiro marcando para recebimento no coletor).
   recebimento('rec_codigo'),
+
+  /// Código do fornecedor padrão do produto
   codEmpresa('cg2_cod'),
-  estado('es1v_status'), //0 ou 1, sendo 1 o registro fechado
+
+  /// 0 ou 1, sendo 1 o registro fechado
+  estado('es1v_status'),
   quant('es1v_quant'),
   dtFabricacao('es1v_dtfabricacao'),
   dtValidade('es1v_dtvalidade'),
@@ -25,6 +38,8 @@ class ValidityModel {
   final int? id;
   final int pId;
   final int empresa;
+  final String codigo;
+  final String nome;
   final int recebimento;
   final int codEmpresa;
   final int estado;
@@ -40,6 +55,8 @@ class ValidityModel {
   ValidityModel({
     required this.pId,
     required this.empresa,
+    required this.codigo,
+    required this.nome,
     required this.recebimento,
     required this.codEmpresa,
     required this.estado,
@@ -57,6 +74,8 @@ class ValidityModel {
       id: json[ValidityColumnsNames.id.columnName] as int?,
       pId: json[ValidityColumnsNames.pId.columnName] as int,
       empresa: json[ValidityColumnsNames.empresa.columnName] as int,
+      codigo: json[ValidityColumnsNames.codigo.columnName] as String,
+      nome: json[ValidityColumnsNames.name.columnName] as String,
       recebimento: json[ValidityColumnsNames.recebimento.columnName] as int,
       codEmpresa: json[ValidityColumnsNames.codEmpresa.columnName] as int,
       estado: json[ValidityColumnsNames.estado.columnName] as int,
@@ -78,6 +97,8 @@ class ValidityModel {
       ValidityColumnsNames.id.columnName: id,
       ValidityColumnsNames.pId.columnName: pId,
       ValidityColumnsNames.empresa.columnName: empresa,
+      ValidityColumnsNames.codigo.columnName: codigo,
+      ValidityColumnsNames.name.columnName: nome,
       ValidityColumnsNames.recebimento.columnName: recebimento,
       ValidityColumnsNames.codEmpresa.columnName: codEmpresa,
       ValidityColumnsNames.estado.columnName: estado,
