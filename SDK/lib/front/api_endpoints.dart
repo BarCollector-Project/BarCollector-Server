@@ -4,4 +4,5 @@ class APIEndpoints {
   static const String products = '$baseUrl/products';
   static const String register = '$baseUrl/register';
   static const String adminUpload = '$baseUrl/admin/upload';
+  static const String validity = '$baseUrl/register/validity';
 }
