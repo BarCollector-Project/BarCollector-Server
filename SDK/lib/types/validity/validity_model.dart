@@ -67,6 +67,10 @@ class ValidityModel {
   });
 
   factory ValidityModel.fromJson(Map<String, dynamic> json) {
+    final json_dtValidade = json[ValidityColumnsNames.dtValidade.columnName];
+    final json_dtFabricacao = json[ValidityColumnsNames.dtFabricacao.columnName];
+    final json_dtCriacao = json[ValidityColumnsNames.dtCriacao.columnName];
+
     return ValidityModel(
       id: json[ValidityColumnsNames.id.columnName] as int?,
       pId: json[ValidityColumnsNames.pId.columnName] as int,
@@ -76,11 +80,11 @@ class ValidityModel {
       codEmpresa: json[ValidityColumnsNames.codEmpresa.columnName] as int,
       estado: json[ValidityColumnsNames.estado.columnName] as int,
       quant: json[ValidityColumnsNames.quant.columnName] as double,
-      dtFabricacao: json[ValidityColumnsNames.dtFabricacao.columnName] as DateTime?,
-      dtValidade: json[ValidityColumnsNames.dtValidade.columnName] as DateTime,
+      dtFabricacao: json_dtFabricacao is DateTime? ? json_dtFabricacao : DateTime.tryParse('$json_dtFabricacao'),
+      dtValidade: json_dtValidade is DateTime ? json_dtValidade : DateTime.parse(json_dtValidade as String),
       lote: json[ValidityColumnsNames.lote.columnName] as String,
       qtInicial: json[ValidityColumnsNames.qtInicial.columnName] as double,
-      dtCriacao: json[ValidityColumnsNames.dtCriacao.columnName] as DateTime?,
+      dtCriacao: json_dtCriacao is DateTime ? json_dtCriacao : DateTime.tryParse('$json_dtCriacao'),
     );
   }
 
