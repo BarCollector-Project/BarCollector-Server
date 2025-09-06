@@ -1,12 +1,12 @@
 import 'package:barcollector_sdk/types/register/data/system_table_model.dart';
 
-enum CollectionReasionColumns {
+enum CollectionReasonColumns {
   id('tab_cod'),
   description('tab_desc'),
   displayTurnover('tab_exibegiro');
 
   final String tableName;
-  const CollectionReasionColumns(this.tableName);
+  const CollectionReasonColumns(this.tableName);
 }
 
 class CollectionReason implements SystemTableModel {
