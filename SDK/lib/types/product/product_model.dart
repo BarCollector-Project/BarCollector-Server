@@ -26,7 +26,7 @@ enum ProductColumns {
 class ProductModel {
   final int id;
   final String name;
-  final int barcode;
+  final String barcode;
   final double? price;
   final double? quatity;
   final int? defaultSuppierId;
@@ -44,7 +44,7 @@ class ProductModel {
     return ProductModel(
       id: map[ProductColumns.id.columnName] as int,
       name: map[ProductColumns.name.columnName] as String,
-      barcode: map[ProductColumns.barcode.columnName] as int,
+      barcode: map[ProductColumns.barcode.columnName] as String,
       price: map[ProductColumns.price.columnName] as double?,
       quatity: map[ProductColumns.quatity.columnName] as double?,
       defaultSuppierId: map[ProductColumns.defaultSuppierId.columnName] as int?,
