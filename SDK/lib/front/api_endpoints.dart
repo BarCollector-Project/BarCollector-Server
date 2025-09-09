@@ -12,4 +12,5 @@ class APIEndpoints {
   /// .../system_table/<NOME_TABELA>, por exemplo .../system_table/st_motivocoleta.
   /// Estes nomes podem ser obtidos em [SystemTables].
   static const String systemTables = '$baseUrl/system_table';
+  static const String supplier = '$baseUrl/supplier';
 }
