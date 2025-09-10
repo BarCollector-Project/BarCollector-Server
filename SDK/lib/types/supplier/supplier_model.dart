@@ -17,8 +17,8 @@ class SupplierModel {
   final int id;
   final String nome;
   final String? fantasia;
-  final int? cnpj;
-  final int? cpf;
+  final String? cnpj;
+  final String? cpf;
   final String? tipoRegistro;
 
   SupplierModel({
@@ -35,8 +35,8 @@ class SupplierModel {
       id: map[SupplierColumns.id.columnName] as int,
       nome: map[SupplierColumns.nome.columnName] as String,
       fantasia: map[SupplierColumns.fantasia.columnName] as String?,
-      cnpj: map[SupplierColumns.cnpj.columnName] as int?,
-      cpf: map[SupplierColumns.cpf.columnName] as int?,
+      cnpj: map[SupplierColumns.cnpj.columnName] as String?,
+      cpf: map[SupplierColumns.cpf.columnName] as String?,
       tipoRegistro: map[SupplierColumns.tipoRegistro.columnName] as String?,
     );
   }
